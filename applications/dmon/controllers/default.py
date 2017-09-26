@@ -7,8 +7,8 @@
 # - user is required for authentication and authorization
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
-from docker import client
-cli = Client(base_url='tcp://172.31.27.231:2377')
+import docker
+cli = docker.from_env();
 
 def index():
     """
@@ -18,8 +18,8 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    nodesList = cli.nodes.list();
-    return dict(nodesList);
+    containerList = cli.services.list();
+    return dict(containerList=containerList);
 
 
 def user():
